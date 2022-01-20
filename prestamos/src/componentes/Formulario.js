@@ -4,7 +4,7 @@ import { calcularTotal } from "../funciones";
 const Formulario = (props) => {
 
     // Aqui colocamos la variables que estaremos usando
-    const {cantidad, guardarCantidad, plazo, guardarPlazo, total, guardarTotal, guardarCargando} = props;
+    const {cantidad, guardarCantidad, plazo, guardarPlazo, guardarTotal, guardarCargando} = props;
 
     // Definir state para mensaje de error
 
