@@ -35,7 +35,7 @@ function App() {
           titulo="Cotizador de Prestamo"
       />
 
-      <div className="container">
+      <div className="container"> 
         <Formulario
           cantidad={cantidad}
           guardarCantidad={guardarCantidad}

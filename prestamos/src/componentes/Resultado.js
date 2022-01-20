@@ -1,7 +1,7 @@
 import React from "react";
 
 const Resultado = ({total, plazo, cantidad}) => ( 
-        <div className= "u-fulll-witdh resultado">
+        <div className= "resultado">
 
             <h2>Resumen</h2>
             <p>La cantidad solicitada es: $ {cantidad}</p>
