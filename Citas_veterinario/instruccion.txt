@@ -1,0 +1,33 @@
+Dentro del api ejecutamos el 1er comando que es:
+npm init
+
+Luego ejecutamos el segundo comando que es una dependencia:
+npm install express mongoose
+
+Por ultimo solo ejecutamos esta dependencia al momento de crear nuestra pagina web:
+npm install --save-dev nodemon
+
+
+Para ejecutar el servidor en modo produccion 
+npm run dev
+
+Para que dejemos siempre nuestra politica de acceso habilitamos el CORS
+npm install cors
+
+=======================================================================================
+Para empezzar a crear el fronted, debemos hacerlo con el siguiente comando:
+npx create-react-app fronted
+
+Debemos crear una dependencia para la parte frotend para crear el routing
+ingresamos a la terminal y nos dirigmos a la carpeta fronted 
+
+luego de estar en la carpeta frontend vamos y ejecutamos el siguiente
+comando:
+npm install react-router-dom 
+
+=======================================================================================
+Instalamos una nueva dependencia, esto se install en la carpeta frontend
+npm install axios 
+
+dentro del frontend en la carpeta src creamos una carpeta que se llamara
+config y adentro un archivo axios 
