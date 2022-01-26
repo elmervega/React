@@ -31,3 +31,8 @@ npm install axios
 
 dentro del frontend en la carpeta src creamos una carpeta que se llamara
 config y adentro un archivo axios 
+=======================================================================================
+Para solucionar el problema de withRouter instalamos estos dos comandos
+npm install react-router-dom@5.2.0
+npm install react-router@5.2.0
+=======================================================================================

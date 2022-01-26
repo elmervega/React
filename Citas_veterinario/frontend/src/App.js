@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 /** Traemos las dependecias de react routing dom */
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 /** importamos nuestro cliente de axios */
 import clienteAxios from './config/axios';
@@ -15,44 +15,60 @@ function App() {
 
   // Creamos el state de la app
   const [citas, guardarCitas]= useState([]);
+  const [consultar, guardarConsultar] = useState(true);
 
   // Creamos el useEffect para consumir la API
   useEffect( () =>{
-      const consultarAPI = () => {
-        clienteAxios.get('/pacientes')
-          .then((respuesta) => {
-            // colocamos en el state el resultado
-            guardarCitas(respuesta.data);
-          })
-          .catch(error => {
-            console.log(error);
-          })
+      if(consultar) {
+        const consultarAPI = () => {
+          clienteAxios.get('/pacientes')
+            .then((respuesta) => {
+              // colocamos en el state el resultado
+              guardarCitas(respuesta.data);
+
+              // deshabilitar la consulta
+              guardarConsultar(false);
+            })
+            .catch(error => {
+              console.log(error);
+            })
+        }
+        consultarAPI();
       }
-      consultarAPI();
-  }, [] );
+  }, [consultar] );
 
 
   return (
       <BrowserRouter>
-          <Routes>
+          <Switch>
 
           <Route
-          exact 
+            exact 
             path="/"
-            element={<Pacientes citas={ citas }/>}
+            component={() => <Pacientes citas={citas}/>}
           />
           <Route 
             exact 
             path="/nueva"
-            element={<NuevaCita/>}
+            component={() => <NuevaCita guardarConsultar={guardarConsultar}/>}
           />
           <Route 
-            exact 
-            path="/cita/:id"
-            element={<Cita/>}
+              exact 
+              path="/cita/:id"
+              render={(props) => {
+                  
+                  //Creamos la variable para citas
+                  const cita = citas.filter(cita => cita._id === props.match.params.id)
+
+                  return (
+                      <Cita 
+                      cita = {cita[0]}
+                      />
+                    )
+              }}
           />
             
-          </Routes> 
+          </Switch> 
       </BrowserRouter>
 
   );
