@@ -36,3 +36,12 @@ Para solucionar el problema de withRouter instalamos estos dos comandos
 npm install react-router-dom@5.2.0
 npm install react-router@5.2.0
 =======================================================================================
+Vamos crearle un Sweet Alert al eliminar, por lo que vamos e instalamos la siguiente:
+esto lo extraemos de la pagina: sweetalert2.github.io
+npm install sweetalert2
+
+=======================================================================================
+
+=======================================================================================
+
+=======================================================================================

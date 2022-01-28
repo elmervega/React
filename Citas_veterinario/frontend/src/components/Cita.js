@@ -1,5 +1,7 @@
 import React, {Fragment} from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import clienteAxios from '../config/axios';
+import Swal from 'sweetalert2';
  
 const Cita = (props) => {
     
@@ -9,7 +11,43 @@ const Cita = (props) => {
     }
  
     // extraer por props
-    const {cita: {nombre, propietario, fecha, hora, telefono, sintomas}} = props;
+    const {cita: {_id, nombre, propietario, fecha, hora, telefono, sintomas}} = props;
+
+    // eliminar un registro, funcion
+    const eliminarCita = id => {
+        clienteAxios.delete(`/pacientes/${id}`)
+
+        Swal.fire({
+                title: 'Estas Seguro?',
+                text: "Una cita eliminada no se puede recuperar!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+        }).then((result) => {
+                if (result.isConfirmed) {
+
+                  // Alerta de eliminada=o
+                  Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                  )
+                  // Eliminado de la base de datos
+                    .then(respuesta => {
+                        props.guardarConsultar(true);
+                        // redireccionamos a la pantalla principal 
+                        props.history.push('/');
+    
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+                }
+          })
+    }
     return (
         <Fragment>
             <h1 className="my-5">Nombre cita: {nombre} </h1>
@@ -34,6 +72,16 @@ const Cita = (props) => {
                                             <div className="contacto py-3">
                                                 <p>Dueño: {propietario}</p>
                                                 <p>Teléfono: {telefono}</p>
+                                </div>
+                                <div className="d-flex">
+                                    <button 
+                                        type="button"
+                                        className='text-uppercase py-2 px-5 font-weight-bold
+                                        btn btn-danger col'
+                                        onClick={ () => eliminarCita(_id)}
+                                    >
+                                        Eliminar &times;
+                                    </button>
                                 </div>
                             </div>
                         </div>
